@@ -1,188 +1,322 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ảnh gái ngẫu nhiên - DaoKe Source</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PARK WANG | HOME</title>
+
+<link rel="shortcut icon" href="https://i.imgur.com/R4YNDY5.jpg">
+
+<meta name="description" content="Portfolio cá nhân của ThanhDieu Developer">
+<meta name="theme-color" content="#00ffff">
+
+<meta property="og:title" content="HELLO TA CHI HẢO - THIS IS PARK WANG !">
+<meta property="og:image" content="https://thanhdieu.com/files/thanhdieugirl.jpg">
+<meta property="og:url" content="https://thanhdieu.com/">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:sans-serif;
+}
+
+body{
+background:#0d1117;
+color:white;
+overflow-x:hidden;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+padding:20px;
+text-align:center;
+animation:fade 1s ease;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.avatar{
+width:120px;
+height:120px;
+border-radius:50%;
+border:3px solid #00ffff;
+box-shadow:0 0 20px #00ffff;
+object-fit:cover;
+margin-top:20px;
+}
+
+.name{
+font-size:28px;
+margin-top:15px;
+font-weight:bold;
+}
+
+.bio{
+opacity:.8;
+margin-top:10px;
+line-height:1.6;
+}
+
+.social{
+margin-top:30px;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.social a{
+text-decoration:none;
+padding:14px;
+border-radius:12px;
+color:white;
+font-weight:bold;
+transition:.3s;
+}
+
+.youtube{
+background:#ff0000;
+}
+
+.facebook{
+background:#1877f2;
+}
+
+.discord{
+background:#5865f2;
+}
+
+.telegram{
+background:#0088cc;
+}
+
+.social a:hover{
+transform:scale(1.05);
+filter:brightness(1.2);
+}
+
+.section-title{
+margin-top:40px;
+margin-bottom:20px;
+font-size:24px;
+}
+
+.bank{
+background:#161b22;
+padding:15px;
+border-radius:15px;
+margin-bottom:15px;
+}
+
+.bank button{
+margin-top:10px;
+padding:8px 15px;
+border:none;
+border-radius:8px;
+background:#00ffff;
+cursor:pointer;
+font-weight:bold;
+}
+
+.skills{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:10px;
+margin-top:20px;
+}
+
+.skill{
+padding:10px 15px;
+background:#21262d;
+border-radius:999px;
+}
+
+footer{
+margin-top:40px;
+opacity:.7;
+padding-bottom:30px;
+}
+
+#fps{
+color:#00ffff;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+padding:10px;
+background:#161b22;
+border-radius:10px;
+}
+
+</style>
 </head>
-<body data-theme="dark">
-    <!-- Nền hạt -->
-    <div class="particles" id="particles"></div>
 
-    <!-- Thanh điều hướng -->
-    <nav class="navbar">
-        <div class="logo">
-            <i class="fas fa-images"></i> RandomBeauty
-        </div>
-        <div class="nav-actions">
-            <div class="theme-toggle-btn" onclick="toggleTheme()" title="Chuyển giao diện"></div>
-        </div>
-    </nav>
+<body>
 
-    <!-- Khung chính -->
-    <div class="container">
-        <!-- Khu vực tiêu đề -->
-        <div class="hero-section">
-            <h1 class="hero-title">Ảnh gái ngẫu nhiên</h1>
-            <p class="hero-subtitle">Khám phá vẻ đẹp trong từng khoảnh khắc, tận hưởng trải nghiệm hình ảnh đỉnh cao</p>
-        </div>
+<div class="container">
 
-        <!-- Nội dung chính -->
-        <div class="main-content">
-            <!-- Thẻ ảnh -->
-            <div class="image-card">
-                <div class="image-container" onclick="enterFullscreen()">
-                    <img id="randomImage" src="" alt="Ảnh gái ngẫu nhiên" style="display: none;">
-                    <div class="loading" id="loading">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <div>Đang tải ảnh đẹp...</div>
-                    </div>
-                    
-                    <div class="image-overlay">
-                        <button class="overlay-btn" onclick="event.stopPropagation(); toggleFavorite()" title="Yêu thích">
-                            <i id="favoriteIcon" class="far fa-heart"></i>
-                        </button>
-                        <button class="overlay-btn" onclick="event.stopPropagation(); showSharePanel()" title="Chia sẻ">
-                            <i class="fas fa-share-alt"></i>
-                        </button>
-                        <button class="overlay-btn" onclick="event.stopPropagation(); enterFullscreen()" title="Toàn màn hình">
-                            <i class="fas fa-expand"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="controls">
-                    <button class="btn" onclick="loadRandomImage()" id="loadBtn">
-                        <i class="fas fa-dice"></i>
-                        <span>Đổi ảnh</span>
-                    </button>
-                    <button class="btn btn-secondary" onclick="downloadImage()" id="downloadBtn">
-                        <i class="fas fa-download"></i>
-                        <span>Tải xuống</span>
-                    </button>
-                    <button class="btn btn-secondary" onclick="toggleFavorite()" id="favoriteBtn">
-                        <i class="far fa-heart"></i>
-                        <span>Yêu thích</span>
-                    </button>
-                    <button class="btn btn-secondary" onclick="showSharePanel()" id="shareBtn">
-                        <i class="fas fa-share-alt"></i>
-                        <span>Chia sẻ</span>
-                    </button>
-                </div>
-                
-                <div class="error-msg" id="errorMsg">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    Tải ảnh thất bại, vui lòng kiểm tra kết nối mạng hoặc thử lại sau
-                </div>
-            </div>
+<div class="topbar">
+<div>HOME</div>
+<div><span id="fps">60</span> FPS</div>
+</div>
 
-            <!-- Thanh bên -->
-            <div class="sidebar">
-                <!-- Thống kê -->
-                <div class="sidebar-card">
-                    <div class="sidebar-title">
-                        <i class="fas fa-chart-bar"></i>
-                        Thống kê dữ liệu
-                    </div>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-number" id="viewCount">0</div>
-                            <div class="stat-label">Lượt xem</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="favoriteCount">0</div>
-                            <div class="stat-label">Số yêu thích</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="downloadCount">0</div>
-                            <div class="stat-label">Lượt tải xuống</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="shareCount">0</div>
-                            <div class="stat-label">Lượt chia sẻ</div>
-                        </div>
-                    </div>
-                </div>
+<img class="avatar"
+src="https://img.win3000.com/m00/48/02/085e1a8c2dec126cfd3ec0b17994bbec.jpg">
 
-                <!-- Chất lượng ảnh -->
-                <div class="sidebar-card">
-                    <div class="sidebar-title">
-                        <i class="fas fa-cog"></i>
-                        Chất lượng ảnh
-                    </div>
-                    <div class="quality-selector">
-                        <button class="quality-btn active" data-quality="original">Gốc</button>
-                        <button class="quality-btn" data-quality="high">HD</button>
-                        <button class="quality-btn" data-quality="medium">Tiêu chuẩn</button>
-                    </div>
-                </div>
+<div class="name">
+PARK WANG TV
+<i class="fas fa-check-circle" style="color:#00ffff"></i>
+</div>
 
-                <!-- Ảnh yêu thích -->
-                <div class="sidebar-card">
-                    <div class="sidebar-title">
-                        <i class="fas fa-heart"></i>
-                        Ảnh yêu thích
-                    </div>
-                    <div class="content-list" id="favoritesList">
-                        <div style="text-align: center; color: var(--text-muted); padding: 30px 20px;">
-                            <i class="far fa-heart" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
-                            Chưa có ảnh yêu thích
-                        </div>
-                    </div>
-                </div>
+<div class="bio">
+Hey brother, I'm a Developer.<br>
+I like website design :)
+</div>
 
-                <!-- Lịch sử xem -->
-                <div class="sidebar-card">
-                    <div class="sidebar-title">
-                        <i class="fas fa-history"></i>
-                        Lịch sử xem
-                    </div>
-                    <div class="content-list" id="historyList">
-                        <div style="text-align: center; color: var(--text-muted); padding: 30px 20px;">
-                            <i class="fas fa-history" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
-                            Chưa có lịch sử
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="section-title">
+Contact Social
+</div>
 
-    <!-- Chế độ toàn màn hình -->
-    <div class="fullscreen-overlay" id="fullscreenOverlay" onclick="exitFullscreen()">
-        <img class="fullscreen-image" id="fullscreenImage" src="" alt="Ảnh toàn màn hình">
-        <button class="fullscreen-close" onclick="exitFullscreen()">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
+<div class="social">
 
-    <!-- Bảng chia sẻ -->
-    <div class="share-panel" id="sharePanel">
-        <h3 class="share-title">Chia sẻ đến</h3>
-        <div class="share-options">
-            <button class="share-btn weibo" onclick="shareToWeibo()">
-                <i class="fab fa-weibo"></i>
-                Weibo
-            </button>
-            <button class="share-btn weixin" onclick="shareToWeixin()">
-                <i class="fab fa-weixin"></i>
-                WeChat
-            </button>
-            <button class="share-btn qq" onclick="shareToQQ()">
-                <i class="fab fa-qq"></i>
-                QQ
-            </button>
-            <button class="share-btn link" onclick="copyLink()">
-                <i class="fas fa-link"></i>
-                Sao chép liên kết
-            </button>
-        </div>
-        <button class="cancel-btn" onclick="hideSharePanel()">Hủy</button>
-    </div>
+<a class="youtube"
+href="https://youtube.com/"
+target="_blank">
+<i class="fab fa-youtube"></i> YouTube
+</a>
 
-    <script src="js/script.js"></script>
+<a class="facebook"
+href="https://facebook.com/"
+target="_blank">
+<i class="fab fa-facebook"></i> Facebook
+</a>
+
+<a class="discord"
+href="#">
+<i class="fab fa-discord"></i> Discord
+</a>
+
+<a class="telegram"
+href="https://t.me/"
+target="_blank">
+<i class="fab fa-telegram"></i> Telegram
+</a>
+
+</div>
+
+<div class="section-title">
+Mobile Banks
+</div>
+
+<div class="bank">
+<h3>BIDV</h3>
+<p id="vietin">
+8844114988
+</p>
+
+<button onclick="copyText('vietin')">
+Copy STK
+</button>
+</div>
+
+<div class="bank">
+<h3>Momo</h3>
+<p id="momo">
+0356581959
+</p>
+
+<button onclick="copyText('momo')">
+Copy STK
+</button>
+</div>
+
+<div class="bank">
+<h3>PayPal</h3>
+<p>
+@ParkWangUser
+</p>
+</div>
+
+<div class="section-title">
+Skill Languages
+</div>
+
+<div class="skills">
+<div class="skill">Javascript</div>
+<div class="skill">Typescript</div>
+<div class="skill">Lua</div>
+<div class="skill">HTML/CSS</div>
+</div>
+
+<footer>
+Created by ParkWanggTV <br>
+© 2026 All Rights Reserved
+</footer>
+
+</div>
+
+<script>
+
+function copyText(id){
+
+const text =
+document.getElementById(id).innerText;
+
+navigator.clipboard.writeText(text);
+
+alert("Đã copy: " + text);
+
+}
+
+var fps = document.getElementById("fps");
+
+var startTime = Date.now();
+
+var frame = 0;
+
+function tick(){
+
+var time = Date.now();
+
+frame++;
+
+if(time - startTime > 1000){
+
+fps.innerHTML =
+(frame / ((time - startTime) / 1000)).toFixed(1);
+
+startTime = time;
+
+frame = 0;
+
+}
+
+requestAnimationFrame(tick);
+
+}
+
+tick();
+
+</script>
+
 </body>
-    </html>
+</html>
